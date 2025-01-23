@@ -1,13 +1,14 @@
 {
   "name": "timeline-todolist",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "publish": "node scripts/publish.js"
   },
   "dependencies": {
     "@ant-design/icons": "^5.6.0",
