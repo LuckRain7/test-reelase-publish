@@ -51,7 +51,7 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: true
-          body_path: CHANGELOG.md
+          body_path: changelog/v${{ steps.get_version.outputs.VERSION }}.txt
           files: |
             timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.tar.gz
             timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.zip
