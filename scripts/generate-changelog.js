@@ -34,7 +34,7 @@ function generateChangelog(version) {
   const date = new Date().toISOString().split("T")[0];
   const filename = path.join(changelogDir, `v${version}.md`);
 
-  const content = `# Changelog (${date})\n\n${commits}`;
+  const content = `# V${version} Changelog  (${date})\n\n${commits}`;
   fs.writeFileSync(filename, content);
 
   console.log(`Changelog has been generated at: changelog/${filename}`);
