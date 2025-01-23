@@ -12,11 +12,11 @@ const [major, minor, patch] = packageObj.version.split(".").map(Number);
 
 // 增加补丁版本号
 const newVersion = `${major}.${minor}.${patch + 1}`;
-console.log("✨ Successfully published version " + newVersion);
 
 // 更新 packageObj.json
 packageObj.version = newVersion;
 fs.writeFileSync(packagePath, JSON.stringify(packageObj, null, 2) + "\n");
+console.log("✨ Successfully create version " + newVersion);
 
 try {
   // 提交更改
