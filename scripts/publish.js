@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
+const { generateChangelog } = require("./generate-changelog");
 
 // 读取 package.json
 const packagePath = path.resolve(__dirname, "../package.json");
@@ -13,6 +14,8 @@ const [major, minor, patch] = packageObj.version.split(".").map(Number);
 // 增加补丁版本号
 const newVersion = `${major}.${minor}.${patch + 1}`;
 
+generateChangelog(newVersion);
+
 // 更新 packageObj.json
 packageObj.version = newVersion;
 fs.writeFileSync(packagePath, JSON.stringify(packageObj, null, 2) + "\n");
@@ -20,7 +23,7 @@ console.log("✨ Successfully create version " + newVersion);
 
 try {
   // 提交更改
-  execSync("git add package.json");
+  execSync("git add package.json changelog/");
   execSync(`git commit -m "chore: bump version to ${newVersion}"`);
 
   // 创建新的 tag
