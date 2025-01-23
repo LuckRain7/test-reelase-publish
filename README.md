@@ -55,7 +55,6 @@ jobs:
           files: |
             timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.tar.gz
             timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.zip
-
 ```
 
 ## 创建发布脚本
