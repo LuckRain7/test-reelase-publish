@@ -13,9 +13,27 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
       - name: Get version from tag
         id: get_version
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Rename and Compress dist
+        run: |
+          mv dist timeline-todolist-v${{ steps.get_version.outputs.VERSION }}
+          tar -czf timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.tar.gz timeline-todolist-v${{ steps.get_version.outputs.VERSION }}
+          zip -r timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.zip timeline-todolist-v${{ steps.get_version.outputs.VERSION }}
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -35,3 +53,6 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: true
+          files: |
+            timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.tar.gz
+            timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.zip

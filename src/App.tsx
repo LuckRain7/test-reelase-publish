@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Timeline, Card, Input, DatePicker, Button, Form, List } from 'antd';
-import { ClockCircleOutlined } from '@ant-design/icons';
-import dayjs from 'dayjs';
-import './App.css';
+import { useState } from "react";
+import { Timeline, Card, Input, DatePicker, Button, Form, List } from "antd";
+import { ClockCircleOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
+import "./App.css";
 
 interface Todo {
   id: number;
@@ -19,7 +19,7 @@ function App() {
     const newTodo: Todo = {
       id: Date.now(),
       title: values.title,
-      date: values.date.format('YYYY-MM-DD'),
+      date: values.date.format("YYYY-MM-DD"),
       completed: false,
     };
     setTodos([...todos, newTodo]);
@@ -27,21 +27,24 @@ function App() {
   };
 
   const toggleTodo = (id: number) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
 
   const groupTodosByWeek = () => {
     const sorted = [...todos].sort((a, b) => dayjs(a.date).diff(dayjs(b.date)));
     const grouped: { [key: string]: Todo[] } = {};
 
-    sorted.forEach(todo => {
+    sorted.forEach((todo) => {
       const date = dayjs(todo.date);
-      const tuesday = date.day() <= 2 ?
-        date.subtract(date.day(), 'day') :
-        date.add(2 - date.day(), 'day');
-      const key = tuesday.format('YYYY-MM-DD');
+      const tuesday =
+        date.day() <= 2
+          ? date.subtract(date.day(), "day")
+          : date.add(2 - date.day(), "day");
+      const key = tuesday.format("YYYY-MM-DD");
       grouped[key] = grouped[key] || [];
       grouped[key].push(todo);
     });
@@ -55,13 +58,13 @@ function App() {
         <Form form={form} onFinish={addTodo} layout="inline">
           <Form.Item
             name="title"
-            rules={[{ required: true, message: '请输入任务内容' }]}
+            rules={[{ required: true, message: "请输入任务内容" }]}
           >
             <Input placeholder="输入任务内容" />
           </Form.Item>
           <Form.Item
             name="date"
-            rules={[{ required: true, message: '请选择日期' }]}
+            rules={[{ required: true, message: "请选择日期" }]}
           >
             <DatePicker placeholder="选择日期" />
           </Form.Item>
@@ -81,10 +84,10 @@ function App() {
             <Card title={`${week} 周`} key={week} className="timeline-card">
               <List
                 dataSource={todos}
-                renderItem={todo => (
+                renderItem={(todo) => (
                   <List.Item
                     onClick={() => toggleTodo(todo.id)}
-                    className={`todo-item ${todo.completed ? 'completed' : ''}`}
+                    className={`todo-item ${todo.completed ? "completed" : ""}`}
                   >
                     <div className="todo-content">
                       <span className="todo-title">{todo.title}</span>
