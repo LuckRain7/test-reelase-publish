@@ -31,6 +31,7 @@ function generateChangelog(version) {
   }
 
   const commits = getCommitsSinceLastTag();
+  const date = new Date().toISOString().split("T")[0];
   const filename = path.join(changelogDir, `v${version}.md`);
 
   const content = `# Changelog (${date})\n\n${commits}`;
