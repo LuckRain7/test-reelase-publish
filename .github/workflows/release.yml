@@ -37,9 +37,8 @@ jobs:
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          token: ${{ secrets.GITHUBTOKEN }}
           name: "Version ${{ steps.get_version.outputs.VERSION }} 🚀"
           body: |
             ## 更新内容 🎉
