@@ -51,7 +51,7 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: true
-          body_path: changelog/v${{ steps.get_version.outputs.VERSION }}.txt
+          body_path: changelog/v${{ steps.get_version.outputs.VERSION }}.md
           files: |
             timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.tar.gz
             timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.zip
@@ -66,12 +66,8 @@ jobs:
 ```js
 const fs = require("fs");
 const path = require("path");
-const {
-    execSync
-} = require("child_process");
-const {
-    generateChangelog
-} = require("./generate-changelog");
+const { execSync } = require("child_process");
+const { generateChangelog } = require("./generate-changelog");
 
 // 读取 package.json
 const packagePath = path.resolve(__dirname, "../package.json");
