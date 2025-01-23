@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - "v*" # 当推送 v 开头的 tag 时触发
+      - "v*" # 识别推送 v 开头的 tag 时触发
 
 jobs:
   release:
@@ -17,7 +17,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "18"
-          # cache: "npm"
 
       - name: Get version from tag
         id: get_version
@@ -40,16 +39,10 @@ jobs:
         with:
           token: ${{ secrets.GITHUBTOKEN }}
           name: "Version ${{ steps.get_version.outputs.VERSION }} 🚀"
-          body: |
-            ## 更新内容 🎉
-            ### 新特性 ✨
-            ### 修复 🐛
-            ### 优化 📝
-            ### 依赖更新 📦
-
           draft: false
           prerelease: false
           generate_release_notes: true
+          body_path: ${{ github.workspace }}-CHANGELOG.md
           files: |
             timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.tar.gz
             timeline-todolist-v${{ steps.get_version.outputs.VERSION }}.zip
