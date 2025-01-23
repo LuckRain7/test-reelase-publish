@@ -1,0 +1,50 @@
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.add-todo-card {
+  margin-bottom: 2rem;
+}
+
+.todo-timeline {
+  margin-top: 2rem;
+}
+
+.timeline-dot {
+  font-size: 16px;
+  color: #1890ff;
+}
+
+.timeline-card {
+  margin-bottom: 1rem;
+}
+
+.todo-item {
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.todo-item:hover {
+  background-color: #f5f5f5;
+}
+
+.todo-item.completed .todo-title {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.todo-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.todo-date {
+  color: #999;
+  font-size: 0.9em;
+}
